@@ -75,18 +75,16 @@ public class DIFactory {
         }
 
         try {
-            if (implementationClass.isAnnotationPresent(DIInject.class) || deep > 0) {
-                for(Constructor constructor : implementationClass.getDeclaredConstructors()) {
-                    ArrayList<Object> args = new ArrayList<>();
+            for(Constructor constructor : implementationClass.getDeclaredConstructors()) {
+                ArrayList<Object> args = new ArrayList<>();
 
-                    for(Parameter parameter : constructor.getParameters()) {
-                        args.add(create(parameter.getType(), deep + 1));
-                    }
-
-                    return implementationClass
-                            .getDeclaredConstructor(constructor.getParameterTypes())
-                            .newInstance((Object[])args.toArray());
+                for(Parameter parameter : constructor.getParameters()) {
+                    args.add(create(parameter.getType(), deep + 1));
                 }
+
+                return implementationClass
+                        .getDeclaredConstructor(constructor.getParameterTypes())
+                        .newInstance((Object[])args.toArray());
             }
         } catch (Exception e) {
             e.printStackTrace();

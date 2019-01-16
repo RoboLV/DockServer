@@ -2,10 +2,8 @@ package dock.framework.models;
 
 import dock.framework.models.components.bundles.interfaces.BundlesManagerInterface;
 import dock.framework.models.components.events.interfaces.EventsManagerInterface;
-import dock.framework.utils.DI.DIInject;
 import dock.framework.utils.DI.DISingleton;
 
-@DIInject
 @DISingleton
 public class Dock {
 

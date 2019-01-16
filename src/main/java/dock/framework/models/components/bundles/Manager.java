@@ -1,11 +1,9 @@
 package dock.framework.models.components.bundles;
 
 import dock.Main;
-import dock.app.App;
 import dock.framework.models.CoreComponent;
 import dock.framework.models.components.bundles.interfaces.BundlesManagerInterface;
 import dock.framework.models.components.events.interfaces.EventsManagerInterface;
-import dock.framework.utils.DI.DIInject;
 import dock.framework.utils.DI.DISingleton;
 import org.w3c.dom.Document;
 
@@ -14,7 +12,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
 
 @DISingleton
-@DIInject
 public class Manager extends CoreComponent implements BundlesManagerInterface {
 
     protected Document configuration;
@@ -53,7 +50,8 @@ public class Manager extends CoreComponent implements BundlesManagerInterface {
     }
 
     private void _loadBundlesConfiguration() {
-        InputStream cfgIs = Main.class.getClassLoader().getResourceAsStream("dock/app/bundles/config.xml");
+        InputStream cfg = getClass().getResourceAsStream("/resources/bundles.xml");
+        InputStream cfgIs = Main.class.getClassLoader().getResourceAsStream("dock/app/bundles/bundles.xml");
 
         try {
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
