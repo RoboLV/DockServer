@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <bundles>
+        <!-- Application core components -->
+        <core/>
+
+        <!-- Application code bundle -->
+        <local>
+            <dependency>
+                <core/>
+            </dependency>
+        </local>
+    </bundles>
+</config>
