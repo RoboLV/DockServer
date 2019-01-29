@@ -11,7 +11,7 @@ public interface EventsManagerInterface extends CoreComponentInterface {
      *
      * @param scope
      */
-    void RegisterScope(String scope);
+    void registerScope(String scope);
 
     /**
      * Register scope with parent scope.
@@ -20,7 +20,7 @@ public interface EventsManagerInterface extends CoreComponentInterface {
      * @param scope
      * @param parentScope
      */
-    void RegisterScope(String scope, String parentScope);
+    void registerScope(String scope, String parentScope);
 
     /**
      * Event which need to be dispatched
@@ -28,15 +28,15 @@ public interface EventsManagerInterface extends CoreComponentInterface {
      * @param eventName
      * @param args
      */
-    void Dispatch(String eventName, Object ... args);
+    void dispatch(String eventName, Object ... args);
 
     /**
-     * Bind event to observer callback method
+     * bind event to observer callback method
      *
      * @param scope
      * @param eventName
      * @param observer
      * @param callback
      */
-    void Bind(String scope, String eventName, Class observer, Method callback);
+    void bind(String scope, String eventName, Class<?> observer, Method callback);
 }

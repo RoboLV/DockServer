@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@DISingleton
 public class DIFactory {
 
     private static Map<Class, Class> diMap = new HashMap<Class, Class>(); // TODO: problem with many implementations

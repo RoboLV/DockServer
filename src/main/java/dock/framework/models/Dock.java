@@ -42,13 +42,13 @@ public class Dock {
     private void initialize() {
         // Initialize Events manager component
         eventsManager.initialize();
-        eventsManager.RegisterScope("dock.framework");
+        eventsManager.registerScope("dock");
 
         // Initialize bundle bundles manager
         bundlesManager.initialize();
 
         // Call other component initialization
-        eventsManager.Dispatch("framework.initialize.after");
+        eventsManager.dispatch("framework.initialize.after");
     }
 
     /**
@@ -56,12 +56,12 @@ public class Dock {
      */
     private void process() {
         // Before process start
-        eventsManager.Dispatch("framework.process.before");
+        eventsManager.dispatch("framework.process.before");
 
         try {
             while (isProcessRunning) {
                 // On process action
-                eventsManager.Dispatch("framework.process.action");
+                eventsManager.dispatch("framework.process.action");
                 stopProcess();
             }
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class Dock {
         }
 
         // On process end
-        eventsManager.Dispatch("framework.process.after", isProcessRunning);
+        eventsManager.dispatch("framework.process.after", isProcessRunning);
     }
 
     /**
@@ -77,7 +77,7 @@ public class Dock {
      */
     private void destruct() {
         // On destruct
-        eventsManager.Dispatch("framework.destruct");
+        eventsManager.dispatch("framework.destruct");
 
         eventsManager.destruct();
         bundlesManager.destruct();
