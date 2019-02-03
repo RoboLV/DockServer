@@ -8,6 +8,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/Console/pom.xml" />
         <option value="$PROJECT_DIR$/DockServerHelper/pom.xml" />
       </set>
     </option>

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="Console" target="8" />
       <module name="DockServer" target="8" />
       <module name="DockServerHelper" target="1.5" />
     </bytecodeTargetLevel>

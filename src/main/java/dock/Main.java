@@ -1,7 +1,7 @@
 package dock;
 
-import dock.framework.models.Dock;
-import dock.framework.utils.DI.DIFactory;
+import dock.framework.Dock;
+import dock.framework.components.di.DIFactory;
 
 public class Main {
     public static void main(final String[] args) throws Exception {
