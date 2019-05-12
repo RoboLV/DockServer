@@ -29,7 +29,7 @@ public class Dock {
             // program main loop
             process();
         } catch (Exception e) {
-            eventsManager.dispatch("dock.fatalError", e);
+            eventsManager.dispatch("dock.error.fatal", e);
             System.out.println(e.getMessage());
         } finally {
             // proper program close
@@ -62,6 +62,8 @@ public class Dock {
         try {
             while (isProcessRunning) {
                 eventsManager.dispatch("dock.process");
+
+                Thread.sleep(1);
             }
         } catch (Exception e) {
             e.printStackTrace();

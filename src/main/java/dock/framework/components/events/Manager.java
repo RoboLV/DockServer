@@ -2,10 +2,12 @@ package dock.framework.components.events;
 
 import dock.framework.CoreComponent;
 import dock.framework.components.events.anotations.Observer;
+import dock.framework.components.events.interfaces.EventConfigurationInterface;
 import dock.framework.components.events.interfaces.EventObserverInterface;
 import dock.framework.components.events.interfaces.EventsManagerInterface;
 import dock.framework.components.di.DIFactory;
 import dock.framework.components.di.anotations.DISingleton;
+import dock.framework.components.events.interfaces.TypedObserverInterface;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
@@ -24,9 +26,9 @@ public class Manager extends CoreComponent implements EventsManagerInterface {
     /**
      * Observer callback map
      *
-     * HashMap<event name, TreeMap<sort key, ObserverCallback>>
+     * HashMap<String, TreeMap<Integer, ArrayList<ObserverCallback>>>
      */
-    protected HashMap<String, TreeMap<Integer, ObserverCallback>> observerCallbacks;
+    protected HashMap<String, TreeMap<Integer, ArrayList<ObserverCallback>>> observerCallbacks;
 
     /**
      * Scope dependency map
@@ -55,14 +57,6 @@ public class Manager extends CoreComponent implements EventsManagerInterface {
     @Override
     public void initialize() {
         super.initialize();
-    }
-
-    /**
-     * Component process update event
-     */
-    @Override
-    public void update() {
-        super.update();
     }
 
     /**
@@ -99,6 +93,7 @@ public class Manager extends CoreComponent implements EventsManagerInterface {
             scopeMap.get(scope).add(parentScope);
         }
 
+        // register string based observers
         Reflections reflections = new Reflections(scope, new SubTypesScanner(false), Thread.currentThread().getContextClassLoader());
         Set<Class<? extends EventObserverInterface>> types = reflections.getSubTypesOf(EventObserverInterface.class);
 
@@ -121,20 +116,22 @@ public class Manager extends CoreComponent implements EventsManagerInterface {
     @Override
     public void dispatch(String eventName, Object... args) {
         if (observerCallbacks.containsKey(eventName)) {
-            TreeMap<Integer, ObserverCallback> map = observerCallbacks.get(eventName);
+            TreeMap<Integer, ArrayList<ObserverCallback>> map = observerCallbacks.get(eventName);
 
-            for (Map.Entry<Integer, ObserverCallback> entry : map.entrySet()) {
-                ObserverCallback callback = entry.getValue();
+            for (Map.Entry<Integer, ArrayList<ObserverCallback>> entry : map.entrySet()) {
+                ArrayList<ObserverCallback> callbacks = entry.getValue();
 
-                Class aClass = callback.getaClass();
-                EventObserverInterface observerInstance = observerInstances.get(aClass);
+                for (ObserverCallback callback : callbacks) {
+                    Class aClass = callback.getaClass();
+                    EventObserverInterface observerInstance = observerInstances.get(aClass);
 
-                try {
-                    callback.getCallback().invoke(observerInstance, args);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                    try {
+                        callback.getCallback().invoke(observerInstance, args);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -161,7 +158,14 @@ public class Manager extends CoreComponent implements EventsManagerInterface {
             observerCallbacks.put(eventName, new TreeMap<>());
         }
 
-        observerCallbacks.get(eventName).put(sortKey, observerCallback);
+        // Add normal compare
+        if (!observerCallbacks.get(eventName).containsKey(sortKey)) {
+            observerCallbacks.get(eventName).put(sortKey, new ArrayList<ObserverCallback>());
+        }
+
+        if (!observerCallbacks.get(eventName).get(sortKey).contains(observerCallback)) {
+            observerCallbacks.get(eventName).get(sortKey).add(observerCallback);
+        }
     }
 
     /**

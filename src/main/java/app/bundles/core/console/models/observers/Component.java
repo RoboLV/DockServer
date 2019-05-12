@@ -13,7 +13,17 @@ public class Component implements EventObserverInterface {
     }
 
     @Observer("dock.initialize")
-    public void Initialize() {
+    public void initialize() {
         consoleManager.initialize();
+    }
+
+    @Observer("console.input.command.source")
+    public void onConsoleCommandReceived(String command) {
+        consoleManager.commandInputObserver(command);
+    }
+
+    @Observer("console.input.command.parsed")
+    public void commandPrinter(String command, String[] parts, String[] m) {
+        System.out.println(command);
     }
 }

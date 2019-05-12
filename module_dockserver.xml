@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_dockserver" default="compile.module.dockserver">
+  <dirname property="module.dockserver.basedir" file="${ant.file.module_dockserver}"/>
+  
+  <property name="module.jdk.home.dockserver" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.dockserver" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.dockserver" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.dockserver" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="dockserver.output.dir" value="${module.dockserver.basedir}/target/classes"/>
+  <property name="dockserver.testoutput.dir" value="${module.dockserver.basedir}/target/test-classes"/>
+  
+  <path id="dockserver.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="dockserver.module.production.classpath">
+    <path refid="${module.jdk.classpath.dockserver}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.34.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.maven:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.2.2.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:5.0.0.final.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-entitymanager:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.reflections:reflections:0.9.9-rc1.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:11.0.2.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+  </path>
+  
+  <path id="dockserver.runtime.production.module.classpath">
+    <pathelement location="${dockserver.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.34.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.maven:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.2.2.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:5.0.0.final.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-entitymanager:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.reflections:reflections:0.9.9-rc1.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:11.0.2.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+  </path>
+  
+  <path id="dockserver.module.classpath">
+    <path refid="${module.jdk.classpath.dockserver}"/>
+    <pathelement location="${dockserver.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.34.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.maven:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.2.2.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:5.0.0.final.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-entitymanager:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.reflections:reflections:0.9.9-rc1.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:11.0.2.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+  </path>
+  
+  <path id="dockserver.runtime.module.classpath">
+    <pathelement location="${dockserver.testoutput.dir}"/>
+    <pathelement location="${dockserver.output.dir}"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.34.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-core:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.jboss.logging:jboss-logging:3.3.0.final.classpath"/>
+    <path refid="library.maven:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath"/>
+    <path refid="library.maven:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_antlr:antlr:2.7.7.classpath"/>
+    <path refid="library.maven:_org.jboss:jandex:1.2.2.final.classpath"/>
+    <path refid="library.maven:_dom4j:dom4j:1.6.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.0.b2.classpath"/>
+    <path refid="library.maven:_org.hibernate.common:hibernate-commons-annotations:5.0.0.final.classpath"/>
+    <path refid="library.maven:_org.hibernate:hibernate-entitymanager:5.0.1.final.classpath"/>
+    <path refid="library.maven:_org.reflections:reflections:0.9.9-rc1.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:11.0.2.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:1.3.9.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.dockserver">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.dockserver">
+    <patternset refid="excluded.from.module.dockserver"/>
+  </patternset>
+  
+  <path id="dockserver.module.sourcepath">
+    <dirset dir="${module.dockserver.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="dockserver.module.test.sourcepath">
+    <dirset dir="${module.dockserver.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.dockserver" depends="compile.module.dockserver.production,compile.module.dockserver.tests" description="Compile module DockServer"/>
+  
+  <target name="compile.module.dockserver.production" depends="register.custom.compilers" description="Compile module DockServer; production classes">
+    <mkdir dir="${dockserver.output.dir}"/>
+    <javac2 destdir="${dockserver.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.dockserver}/javac">
+      <compilerarg line="${compiler.args.dockserver}"/>
+      <bootclasspath refid="dockserver.module.bootclasspath"/>
+      <classpath refid="dockserver.module.production.classpath"/>
+      <src refid="dockserver.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.dockserver"/>
+    </javac2>
+    
+    <copy todir="${dockserver.output.dir}">
+      <fileset dir="${module.dockserver.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.dockserver.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.dockserver.tests" depends="register.custom.compilers,compile.module.dockserver.production" description="compile module DockServer; test classes" unless="skip.tests">
+    <mkdir dir="${dockserver.testoutput.dir}"/>
+    <javac2 destdir="${dockserver.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.dockserver}/javac">
+      <compilerarg line="${compiler.args.dockserver}"/>
+      <bootclasspath refid="dockserver.module.bootclasspath"/>
+      <classpath refid="dockserver.module.classpath"/>
+      <src refid="dockserver.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.dockserver"/>
+    </javac2>
+    
+    <copy todir="${dockserver.testoutput.dir}">
+      <fileset dir="${module.dockserver.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.dockserver" description="cleanup module">
+    <delete dir="${dockserver.output.dir}"/>
+    <delete dir="${dockserver.testoutput.dir}"/>
+  </target>
+</project>
